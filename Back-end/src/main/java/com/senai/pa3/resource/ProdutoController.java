@@ -15,13 +15,11 @@ public class ProdutoController {
 
     @GetMapping
     public void findAll() {
-        LOGGER.info("findAll called");
+        LOGGER.info("Iniciado a busca de todos os produtos");
     }
 
     @PostMapping
     public void insert() {
-        LOGGER.info("insert called");
+        LOGGER.info("Iniciado a inserção de um novo produto");
     }
-
-
 }
