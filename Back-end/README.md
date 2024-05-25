@@ -55,4 +55,3 @@ mvn spring-boot:run
 ou 
 clicar no play no na classe ProjetoAplicadoApplication.java
 ```
-
