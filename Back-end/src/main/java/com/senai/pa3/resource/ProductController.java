@@ -2,10 +2,8 @@ package com.senai.pa3.resource;
 
 import com.senai.pa3.dto.ProductDTO;
 import com.senai.pa3.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -50,18 +46,18 @@ public class ProductController {
     public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO productDTO) {
         LOGGER.info("Iniciado a inserção de um novo produto");
         var response = productService.insert(productDTO);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(response.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(response.getIdProduct()).toUri();
         LOGGER.info("Finalizado a inserção de um novo produto");
         return ResponseEntity.created(uri).body(response);
     }
 
-//    @PutMapping(value = "/{id}")
-//    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO) {
-//        LOGGER.info("Iniciado a atualização de um produto");
-//        var response = productService.update(id, productDTO);
-//        LOGGER.info("Finalizado a atualização de um produto");
-//        return ResponseEntity.ok().body(response);
-//    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO) {
+        LOGGER.info("Iniciado a atualização de um produto");
+        var response = productService.update(id, productDTO);
+        LOGGER.info("Finalizado a atualização de um produto");
+        return ResponseEntity.ok().body(response);
+    }
 
 //    @DeleteMapping(value = "/{id}")
 //    public ResponseEntity<Void> delete(@PathVariable Long id) {
