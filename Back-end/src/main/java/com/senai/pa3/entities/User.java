@@ -15,12 +15,13 @@ import java.io.Serializable;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_product")
-public class Product implements Serializable {
+@Table(name = "tb_user")
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProduct;
+    private Long idUser;
     private String name;
-    private String description;
+    private String position;
+    private String type;
 }
