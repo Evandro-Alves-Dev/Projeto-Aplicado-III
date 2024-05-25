@@ -1,13 +1,11 @@
 package com.senai.pa3.dto;
 
 import com.senai.pa3.entities.Product;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -15,20 +13,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ProductDTO implements Serializable {
 
-    private Long id;
+    private Long idProduct;
 
     @NotBlank(message = "Campo obrigatório")
-    @NotEmpty(message = "Campo obrigatório")
-    @NotNull(message = "Campo obrigatório")
     private String name;
 
     @NotBlank(message = "Campo obrigatório")
-    @NotEmpty(message = "Campo obrigatório")
-    @NotNull(message = "Campo obrigatório")
     private String description;
 
     public ProductDTO(Product entity) {
-        id = entity.getId();
+        idProduct = entity.getIdProduct();
         name = entity.getName();
         description = entity.getDescription();
     }
