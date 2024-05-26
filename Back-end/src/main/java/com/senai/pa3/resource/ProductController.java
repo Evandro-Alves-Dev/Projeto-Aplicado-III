@@ -46,7 +46,7 @@ public class ProductController {
     public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO productDTO) {
         LOGGER.info("Iniciado a inserção de um novo produto");
         var response = productService.insert(productDTO);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(response.getIdProduct()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(response.getId()).toUri();
         LOGGER.info("Finalizado a inserção de um novo produto");
         return ResponseEntity.created(uri).body(response);
     }
