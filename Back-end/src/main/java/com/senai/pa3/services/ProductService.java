@@ -8,6 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProductService {
 
@@ -17,10 +20,18 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    @Transactional(readOnly = true)
+    public List<ProductDTO> findAll() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(ProductDTO::new).collect(Collectors.toList());
+    }
 
-    //TODO: Implementar o método findAll
-    //TODO: Implementar o método findById
-
+    @Transactional(readOnly = true)
+    public ProductDTO findById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Id " + id + " não encontrado"));
+        return new ProductDTO(product);
+    }
     @Transactional
     public ProductDTO insert(ProductDTO productDTO) {
         Product product = new Product();
@@ -41,7 +52,13 @@ public class ProductService {
         }
     }
 
-    //TODO: Implementar o método delete
+    @Transactional
+    public void delete(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Id " + id + " não encontrado");
+        }
+        productRepository.deleteById(id);
+    }
 
     private void copyDtoToEntity(ProductDTO productDTO, Product product) {
         product.setName(productDTO.getName());
