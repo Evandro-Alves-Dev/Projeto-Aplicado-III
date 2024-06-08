@@ -9,6 +9,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
 
@@ -18,8 +21,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    //TODO: Implementar o método findAll
-    //TODO: Implementar o método findById
+    @Transactional(readOnly = true)
+    public List<UserDTO> findAll() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO findById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Id " + id + " não encontrado"));
+        return new UserDTO(user);
+    }
 
     @Transactional
     public UserDTO insert(UserDTO userDTO) {
@@ -41,7 +54,13 @@ public class UserService {
         }
     }
 
-    //TODO: Implementar o método delete
+    @Transactional
+    public void delete(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Id " + id + " não encontrado");
+        }
+        userRepository.deleteById(id);
+    }
 
     private void copyDtoToEntity(UserDTO userDTO, User user) {
         user.setName(userDTO.getName());
