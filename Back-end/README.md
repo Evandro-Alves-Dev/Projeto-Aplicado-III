@@ -7,7 +7,7 @@ A aplicação consiste em um sistema de apontamento de relatórios d eprodução
 
 
 ## Integrantes
- - Evandro Allves
+ - Evandro Alves
  - Gilson Langa
  - Vitória
  - Lucas Jose de Paula
