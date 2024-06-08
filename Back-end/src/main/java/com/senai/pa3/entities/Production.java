@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -24,9 +25,9 @@ public class Production implements Serializable {
     private Float planQuantity;
     private Float realQuantity;
     private String unit;
-    private String startTime;    // retornar para LocalDateTime
-    private String finishTime;   // retornar para LocalDateTime
-    private String downtime; // tempo de parada  // retornar para LocalDateTime
+    private LocalDateTime startTime;
+    private LocalDateTime finishTime;
+    private LocalDateTime downtime; // tempo de parada
     private String packageType;
     private String labelType;
     private String equipment;

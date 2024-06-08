@@ -75,6 +75,5 @@ public class ProductionService {
         production.setProductionBatch(productionDTO.getProductionBatch());
         production.setBestBefore(productionDTO.getBestBefore());
         production.setNotes(productionDTO.getNotes());
-
     }
 }
