@@ -32,17 +32,17 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll() {
-        LOGGER.info("Iniciado a busca de todos os produtos");
-        var response = userService.findAll(); // TODO: Implementar o método findAll na classe UserService @Gilson
-        LOGGER.info("Finalizado a busca de todos os produtos");
+        LOGGER.info("Iniciado a busca de todod os usuarios");
+        var response = userService.findAll();
+        LOGGER.info("Finalizado a busca de todos os usuarios");
         return ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-        LOGGER.info("Iniciado a busca do produto por ID");
-        var response = userService.findById(id); // TODO: Implementar o método findById na classe UserService @Gilson
-        LOGGER.info("Finalizado a busca do produto por ID");
+        LOGGER.info("Iniciado a busca do usuario por ID");
+        var response = userService.findById(id);
+        LOGGER.info("Finalizado a busca do usuario por ID");
         return ResponseEntity.ok().body(response);
     }
 
@@ -66,7 +66,7 @@ public class UserController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         LOGGER.info("Iniciado a exclusão de usuario");
-        userService.delete(id); // TODO: Implementar o método delete na classe UserService @Gilson
+        userService.delete(id);
         LOGGER.info("Finalizado a exclusão de um usuario");
         return ResponseEntity.noContent().build();
     }

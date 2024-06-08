@@ -9,13 +9,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductionDTO implements Serializable {
-
-
 
     private Long idProduction;
     //private Long productIdProduct;
@@ -30,14 +29,14 @@ public class ProductionDTO implements Serializable {
     @NotBlank(message = "Campo obrigatório")
     private String unit;
 
-    @NotBlank(message = "Campo obrigatório")
-    private String startTime;    // retornar para LocalDateTime
+//    @NotBlank(message = "Campo obrigatório")
+    private LocalDateTime startTime;
 
-    @NotBlank(message = "Campo obrigatório")
-    private String finishTime;   // retornar para LocalDateTime
+//    @NotBlank(message = "Campo obrigatório")
+    private LocalDateTime finishTime;
 
-    @NotBlank(message = "Campo obrigatório")
-    private String downtime; // tempo de parada  // retornar para LocalDateTime
+//    @NotBlank(message = "Campo obrigatório")
+    private LocalDateTime downtime; // tempo de parada
 
     @NotBlank(message = "Campo obrigatório")
     private String packageType;
@@ -59,10 +58,6 @@ public class ProductionDTO implements Serializable {
 
     @NotBlank(message = "Campo obrigatório")
     private String notes;   // observações
-
-
-
-
     public ProductionDTO(Production entity) {
         idProduction = entity.getIdProduction();
         planQuantity = entity.getPlanQuantity();
