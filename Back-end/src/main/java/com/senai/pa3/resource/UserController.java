@@ -4,8 +4,6 @@ import com.senai.pa3.dto.UserDTO;
 import com.senai.pa3.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import java.net.URI;
-import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -50,7 +47,7 @@ public class UserController {
     public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserDTO userDTO) {
         LOGGER.info("Iniciado a inserção de um novo usuario");
         var response = userService.insert(userDTO);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(response.getIdUser()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(response.getId()).toUri();
         LOGGER.info("Finalizado a inserção de um novo usuario");
         return ResponseEntity.created(uri).body(response);
     }

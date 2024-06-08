@@ -2,8 +2,10 @@ package com.senai.pa3.exceptions.handle;
 
 
 import com.senai.pa3.exceptions.DataBaseException;
+import com.senai.pa3.exceptions.ParametrosException;
 import com.senai.pa3.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,6 +31,16 @@ public class StandardHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(StandardError.builder()
                 .timestamp(Instant.now())
                 .status(HttpStatus.BAD_REQUEST.value())
+                .message(e.getMessage())
+                .path(http.getRequestURI())
+                .build());
+    }
+
+    @ExceptionHandler(ParametrosException.class)
+    public ResponseEntity<StandardError> parametros(ParametrosException e, HttpServletRequest http) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(StandardError.builder()
+                .timestamp(Instant.now())
+                .status(HttpStatus.NOT_FOUND.value())
                 .message(e.getMessage())
                 .path(http.getRequestURI())
                 .build());
