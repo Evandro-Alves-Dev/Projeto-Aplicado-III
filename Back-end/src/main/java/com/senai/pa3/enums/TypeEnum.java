@@ -2,19 +2,19 @@ package com.senai.pa3.enums;
 
 import com.senai.pa3.exceptions.ParametrosException;
 
-public enum TipoEnum {
+public enum TypeEnum {
 
     ADMINISTRADOR("Administrador"),
     OPERADOR("Operador");
 
     private String tipo;
 
-    TipoEnum(String tipo) {
+    TypeEnum(String tipo) {
         this.tipo = tipo;
     }
 
     public static String parse(String type) {
-        for (TipoEnum tipoEnum : TipoEnum.values()) {
+        for (TypeEnum tipoEnum : TypeEnum.values()) {
             if (tipoEnum.tipo.equals(type)) {
                 return type;
             }

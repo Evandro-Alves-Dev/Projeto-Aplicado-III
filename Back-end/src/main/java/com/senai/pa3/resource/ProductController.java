@@ -3,6 +3,7 @@ package com.senai.pa3.resource;
 import com.senai.pa3.dto.ProductDTO;
 import com.senai.pa3.services.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping(value = "/product", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 public class ProductController {
 
     private static final Logger LOGGER = Logger.getLogger(ProductController.class.getName());
@@ -46,7 +47,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ProductDTO> insert(@Valid ProductDTO productDTO) {
         LOGGER.info("Iniciado a inserção de um novo produto");
         var response = productService.insert(productDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(response.getId()).toUri();

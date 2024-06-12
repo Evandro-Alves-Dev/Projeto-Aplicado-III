@@ -3,6 +3,7 @@ package com.senai.pa3.resource;
 import com.senai.pa3.dto.UserDTO;
 import com.senai.pa3.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping(value = "/user", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 public class UserController {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());

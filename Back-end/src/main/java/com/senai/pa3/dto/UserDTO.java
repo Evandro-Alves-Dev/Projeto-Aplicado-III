@@ -17,15 +17,12 @@ public class UserDTO implements Serializable {
     private Long id;
 
     @NotBlank(message = "Campo obrigatório")
-//    @Min(value = 3, message = "O nome deve ter no mínimo 3 caracteres")
     private String name;
 
     @NotBlank(message = "Campo obrigatório")
-//    @Min(value = 3, message = "O cargo deve ter no mínimo 3 caracteres")
     private String position;
 
     @NotBlank(message = "Campo obrigatório")
-//    @Min(value = 3, message = "O tipo deve ter no mínimo 3 caracteres")
     private String type;
 
     public UserDTO(User entity) {

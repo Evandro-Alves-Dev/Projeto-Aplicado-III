@@ -1,13 +1,16 @@
 package com.senai.pa3.services;
 
 import com.senai.pa3.dto.ProductionDTO;
+import com.senai.pa3.entities.Product;
 import com.senai.pa3.entities.Production;
+import com.senai.pa3.enums.WorkShiftEnum;
 import com.senai.pa3.exceptions.ResourceNotFoundException;
 import com.senai.pa3.repository.ProductionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +51,7 @@ public class ProductionService {
             copyDtoToEntity(productionDTO, entity);
             entity = productionRepository.save(entity);
             return new ProductionDTO(entity);
-        } catch (EntityNotFoundException e ) {
+        } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id " + id + " não encontrado");
         }
     }
@@ -65,15 +68,37 @@ public class ProductionService {
         production.setPlanQuantity(productionDTO.getPlanQuantity());
         production.setRealQuantity(productionDTO.getRealQuantity());
         production.setUnit(productionDTO.getUnit());
-        production.setStartTime(productionDTO.getStartTime());
-        production.setFinishTime(productionDTO.getFinishTime());
-        production.setDowntime(productionDTO.getDowntime());
+        // Data e hora de início definidos automaticamente
+        production.setStartTime(LocalDateTime.now());
+        //production.setFinishTime(productionDTO.getFinishTime()); //
+        //production.setDowntime(productionDTO.getDowntime());
         production.setPackageType(productionDTO.getPackageType());
         production.setLabelType(productionDTO.getLabelType());
         production.setEquipment(productionDTO.getEquipment());
-        production.setWorkShift(productionDTO.getWorkShift());
-        production.setProductionBatch(productionDTO.getProductionBatch());
+        // Turno de trabalho definido automaticamente
+        production.setWorkShift(buildWorkShift(productionDTO.getWorkShift()));
+        // Lote de produção definido automaticamente
+        production.setProductionBatch(buildBatch(production.getWorkShift()));
         production.setBestBefore(productionDTO.getBestBefore());
         production.setNotes(productionDTO.getNotes());
+    }
+
+//    private LocalDateTime buildFormatterHour(LocalDateTime hour) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS");
+//        LocalDateTime date = LocalDateTime.parse(hour.toString(), formatter);
+//        return date;
+//    }
+
+    private String buildWorkShift(String workShift) {
+        if (workShift == null || workShift.isEmpty()) {
+            return WorkShiftEnum.parseToString(LocalDateTime.now());
+        } else {
+            return WorkShiftEnum.parse(workShift.toUpperCase());
+        }
+    }
+
+    private String buildBatch(String workShift) {
+        var batch = "LT" + "-" + LocalDateTime.now() + "-" + workShift;
+        return batch;
     }
 }
