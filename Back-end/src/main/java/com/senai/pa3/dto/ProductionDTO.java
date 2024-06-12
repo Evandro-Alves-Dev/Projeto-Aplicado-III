@@ -1,6 +1,13 @@
 
 package com.senai.pa3.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.senai.pa3.config.CustomLocalDateDeserializer;
+import com.senai.pa3.config.CustomLocalDateSerializer;
 import com.senai.pa3.entities.Production;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,11 +16,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductionDTO implements Serializable {
 
     private Long idProduction;
@@ -23,19 +32,15 @@ public class ProductionDTO implements Serializable {
     @NotNull(message = "Campo obrigatório")
     private Float planQuantity;
 
-    @NotNull(message = "Campo obrigatório")
     private Float realQuantity;
 
     @NotBlank(message = "Campo obrigatório")
     private String unit;
 
-//    @NotBlank(message = "Campo obrigatório")
     private LocalDateTime startTime;
 
-//    @NotBlank(message = "Campo obrigatório")
     private LocalDateTime finishTime;
 
-//    @NotBlank(message = "Campo obrigatório")
     private LocalDateTime downtime; // tempo de parada
 
     @NotBlank(message = "Campo obrigatório")
@@ -47,17 +52,19 @@ public class ProductionDTO implements Serializable {
     @NotBlank(message = "Campo obrigatório")
     private String equipment;
 
-    @NotBlank(message = "Campo obrigatório")
-    private String workShift;   // turno de produção
+    private String workShift;// turno de produção
 
-    @NotBlank(message = "Campo obrigatório")
-    private String productionBatch; // lote de produção
+    private String productionBatch;// lote de produção
 
-    @NotBlank(message = "Campo obrigatório")
-    private String bestBefore;  // validade do produto
+    @NotNull(message = "Campo obrigatório")
+    @JsonSerialize(using = CustomLocalDateSerializer.class)
+    @JsonDeserialize(using = CustomLocalDateDeserializer.class)
+    private LocalDate bestBefore;// validade do produto em formato dd-MM-yyyy
 
-    @NotBlank(message = "Campo obrigatório")
-    private String notes;   // observações
+    private String notes;// observações
+
+    private Long productId;
+
     public ProductionDTO(Production entity) {
         idProduction = entity.getIdProduction();
         planQuantity = entity.getPlanQuantity();
@@ -72,8 +79,7 @@ public class ProductionDTO implements Serializable {
         workShift = entity.getWorkShift(); // turno de trabalho
         productionBatch = entity.getProductionBatch(); // lote de produção
         bestBefore = entity.getBestBefore();
-        notes = entity.getNotes();  // observações
-
-
+        notes = entity.getNotes(); // observações
+        productId = entity.getProductId();
     }
 }

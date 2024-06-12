@@ -60,7 +60,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    private void copyDtoToEntity(ProductDTO productDTO, Product product) {
+    protected void copyDtoToEntity(ProductDTO productDTO, Product product) {
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
     }

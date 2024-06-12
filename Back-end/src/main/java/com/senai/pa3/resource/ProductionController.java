@@ -3,6 +3,7 @@ package com.senai.pa3.resource;
 import com.senai.pa3.dto.ProductionDTO;
 import com.senai.pa3.services.ProductionService;
 import jakarta.validation.Valid;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/production")
+@RequestMapping(value = "/production")
 public class ProductionController {
 
     private static final Logger LOGGER = Logger.getLogger(ProductionController.class.getName());

@@ -4,12 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -33,6 +36,7 @@ public class Production implements Serializable {
     private String equipment;
     private String workShift;   // turno de produção
     private String productionBatch; // lote de produção
-    private String bestBefore;  // validade do produto
+    private LocalDate bestBefore;  // validade do produto
     private String notes;   // observações
+    private Long productId;
 }

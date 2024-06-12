@@ -2,7 +2,7 @@ package com.senai.pa3.services;
 
 import com.senai.pa3.dto.UserDTO;
 import com.senai.pa3.entities.User;
-import com.senai.pa3.enums.TipoEnum;
+import com.senai.pa3.enums.TypeEnum;
 import com.senai.pa3.exceptions.ResourceNotFoundException;
 import com.senai.pa3.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -65,6 +65,6 @@ public class UserService {
     private void copyDtoToEntity(UserDTO userDTO, User user) {
         user.setName(userDTO.getName());
         user.setPosition(userDTO.getPosition());
-        user.setType(TipoEnum.parse(userDTO.getType()));
+        user.setType(TypeEnum.parse(userDTO.getType()));
     }
 }
