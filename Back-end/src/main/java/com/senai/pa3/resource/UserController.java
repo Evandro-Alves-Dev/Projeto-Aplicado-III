@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(value = "/user", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+@RequestMapping(value = "/user", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
 public class UserController {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());

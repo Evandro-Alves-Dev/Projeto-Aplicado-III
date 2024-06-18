@@ -29,34 +29,28 @@ public class ProductionDTO implements Serializable {
     //private Long productIdProduct;
     //private Long userIdUser;
 
-    @NotNull(message = "Campo obrigatório")
     private Float planQuantity;
 
     private Float realQuantity;
 
-    @NotBlank(message = "Campo obrigatório")
     private String unit;
 
-    private LocalDateTime startTime;
+    private String startTime;
 
-    private LocalDateTime finishTime;
+    private String finishTime;
 
-    private LocalDateTime downtime; // tempo de parada
+    private String downtime; // tempo de parada
 
-    @NotBlank(message = "Campo obrigatório")
     private String packageType;
 
-    @NotBlank(message = "Campo obrigatório")
     private String labelType;
 
-    @NotBlank(message = "Campo obrigatório")
     private String equipment;
 
     private String workShift;// turno de produção
 
     private String productionBatch;// lote de produção
 
-    @NotNull(message = "Campo obrigatório")
     @JsonSerialize(using = CustomLocalDateSerializer.class)
     @JsonDeserialize(using = CustomLocalDateDeserializer.class)
     private LocalDate bestBefore;// validade do produto em formato dd-MM-yyyy
