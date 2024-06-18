@@ -5,8 +5,12 @@ import com.senai.pa3.entities.Product;
 import com.senai.pa3.exceptions.ResourceNotFoundException;
 import com.senai.pa3.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +23,27 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
+
+//    public List<ProductDTO> findAll2() {
+//        public byte[] gerarRelatorioPDF() {
+//            List<Product> produtos = productRepository.findAll();
+//
+//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//            org.w3c.dom.Document document = new Document();
+//            try {
+//                PdfWriter.getInstance(document, outputStream);
+//                document.open();
+//                for (Produto produto : produtos) {
+//                    document.add(new Paragraph(produto.toString()));
+//                }
+//                document.close();
+//            } catch (DocumentException e) {
+//                e.printStackTrace();
+//            }
+//            return outputStream.toByteArray();
+//        }
+//    }
 
     @Transactional(readOnly = true)
     public List<ProductDTO> findAll() {

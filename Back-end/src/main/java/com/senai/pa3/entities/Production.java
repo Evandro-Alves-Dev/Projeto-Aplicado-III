@@ -28,9 +28,9 @@ public class Production implements Serializable {
     private Float planQuantity;
     private Float realQuantity;
     private String unit;
-    private LocalDateTime startTime;
-    private LocalDateTime finishTime;
-    private LocalDateTime downtime; // tempo de parada
+    private String startTime;
+    private String finishTime;
+    private String downtime; // tempo de parada
     private String packageType;
     private String labelType;
     private String equipment;

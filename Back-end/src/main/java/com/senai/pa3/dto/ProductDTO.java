@@ -18,11 +18,11 @@ public class ProductDTO implements Serializable {
     private Long id;
 
     @NotBlank(message = "Campo obrigatório")
-    @JsonProperty("nome")
+    @JsonProperty("name")
     private String name;
 
     @NotBlank(message = "Campo obrigatório")
-    @JsonProperty("descricao")
+    @JsonProperty("description")
     private String description;
 
     public ProductDTO(Product entity) {
